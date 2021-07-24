@@ -38,7 +38,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token =  auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Email or Password invalid'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -111,7 +111,12 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+
+            'name' => auth()->user()->name,
+            'user_id' => auth()->user()->id,
+            'email' => auth()->user()->email,
+
         ]);
     }
 }
