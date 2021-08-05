@@ -53,3 +53,5 @@ Route::group([
 //     Route::put('update/{product}',  [ProductController::class, 'update']);
 //     Route::delete('delete/{product}',  [ProductController::class, 'destroy']);
 // });
+
+Route::apiResource('/employee','Api/EmployeeController');
